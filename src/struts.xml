@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <!-- 登录 -->
+        <action name="LoginAction" class="actions.LoginAction">
+            <result name="success" type="chain">MainAction</result>
+            <result name="login">index.jsp</result>
+        </action>
+        <!-- 注册 -->
+        <action name="SignAction" class="actions.SignAction">
+            <result name="success">jsp/main/main.jsp</result>
+            <result name="error">jsp/sign/sign.jsp</result>
+            <result name="stepTwo">jsp/sign/detail.jsp</result>
+            <result name="stepTwoError">jsp/sign/detail.jsp</result>
+            <result name="stepThree">jsp/sign/interesting.jsp</result>
+            <result name="kindListError">jsp/sign/kindListError.jsp</result>
+            <result name="saveInterestedError">jsp/sign/saveInterestedError.jsp</result>
+            <result name="signExcept" type="redirectAction">
+                <param name="actionName">MainAction</param>
+                <param name="userBean">${userBean}</param>
+            </result>
+        </action>
+        <!-- 加载主页及推送问题列表（将热搜及用户搜索历史存入localStorage） -->
+        <action name="MainAction" class="actions.MainAction" method="execute">
+            <result name="success">jsp/main/main.jsp</result>
+        </action>
+        <!-- 搜索问题 -->
+        <action name="SearchQuestionAction" class="actions.SearchQuestionAction" method="execute">
+            <result name="success">jsp/main/main.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">MainAction</param>
+                <param name="userBean">${userBean}</param>
+            </result>
+        </action>
+        <!-- 提问 -->
+        <action name="questionAction" class="actions.questionAction" method="execute">
+            <result name="success">jsp/main/main.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+        <!-- 回答 -->
+        <action name="answerAction" class="actions.answerAction" >
+            <result name="success">jsp/main/main.jsp</result>
+        </action>
+    </package>
+</struts>
