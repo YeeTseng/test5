@@ -46,5 +46,12 @@
         <action name="answerAction" class="actions.answerAction" >
             <result name="success">jsp/main/main.jsp</result>
         </action>
+        <!-- 查询用户（微信小程序） -->
+        <action name="userInfoAction" class="actions.userInfoAction">
+
+        </action>
+        <action name="/wx/LoginAction" class="actions.wxLoginAction">
+
+        </action>
     </package>
 </struts>
